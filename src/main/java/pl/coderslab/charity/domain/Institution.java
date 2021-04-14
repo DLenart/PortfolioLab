@@ -13,6 +13,6 @@ public class Institution {
     @Column(unique = true, nullable = false)
     private String name;
     @Column(nullable = false)
-    private Long description;
+    private String description;
 
 }
