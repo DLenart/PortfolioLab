@@ -1,6 +1,7 @@
 package pl.coderslab.charity.domain;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,10 +18,8 @@ public class Donation {
     @Column(nullable = false)
     private Long quantity;
     @ManyToMany
-    @JoinColumn(name = "categories")
     private List <Category> categories;
     @ManyToOne
-    @JoinColumn(name = "institution")
     private Institution institution;
     @Column(nullable = false)
     private String street;
@@ -29,6 +28,7 @@ public class Donation {
     @Column(nullable = false)
     private String zipCode;
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
     @Column(nullable = false)
     private LocalTime pickUpTime;

@@ -2,33 +2,39 @@ package pl.coderslab.charity.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.domain.Donation;
-import pl.coderslab.charity.domain.Institution;
+import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 import pl.coderslab.charity.repository.InstitutionRepository;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class DonationController {
 
     private final DonationRepository donationRepository;
     private final InstitutionRepository institutionRepository;
+    private final CategoryRepository categoryRepository;
 
-    public DonationController(DonationRepository donationRepository, InstitutionRepository institutionRepository) {
+
+    public DonationController(DonationRepository donationRepository, InstitutionRepository institutionRepository, CategoryRepository categoryRepository) {
         this.donationRepository = donationRepository;
         this.institutionRepository = institutionRepository;
+        this.categoryRepository = categoryRepository;
     }
-        @RequestMapping(value ="/admin/donation/add", method = RequestMethod.GET)
+
+        @RequestMapping(value ="/form", method = RequestMethod.GET)
         public String addDonations(Model model){
             model.addAttribute("donation", new Donation());
             model.addAttribute("institutions", institutionRepository.findAll());
-            return "donationAdd";
+            model.addAttribute("categories", categoryRepository.findAll());
+            return "form";
     }
-        @RequestMapping(value ="/admin/donation/add", method = RequestMethod.POST)
+        @RequestMapping(value ="/form", method = RequestMethod.POST)
         public String procesAddDonation(@ModelAttribute Donation donation){
             donationRepository.save(donation);
-            return "donationAdd";
+            return "formConfirmation";
         }
 }

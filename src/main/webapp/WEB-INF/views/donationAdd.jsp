@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form"
            uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Title</title>
@@ -19,12 +20,12 @@
             <form:input path="quantity" type="number" class="form-control form-control-user" id="exampleQuantity"
                         placeholder="Liczba worków"/>
         </div>
-        <c:forEach items="${institutions}" var="institution">
+
         <td><form:select path="institution">
-                <form:options items="${institutions}" />
+            <form:options items="${institutions}"/>
         </form:select>
         </td>
-            </c:forEach>
+
         <div class="col-sm-6 mb-3 mb-sm-0">
             <form:input path="street" type="text" class="form-control form-control-user" id="exampleStreet"
                         placeholder="Ulica"/>
@@ -39,14 +40,15 @@
         </div>
         <div class="col-sm-6 mb-3 mb-sm-0">
             <form:input path="pickUpDate" type="date" class="form-control form-control-user" id="exaplePickUpDate"
-                        placeholder="Data odbioru (w formacie DD-MM-RRRR)"/>
+                        placeholder="Data odbioru (w formacie yyyy-MM-dd)"/>
         </div>
         <div class="col-sm-6 mb-3 mb-sm-0">
             <form:input path="pickUpTime" type="time" class="form-control form-control-user" id="exaplePickUpTime"
                         placeholder="Data odbioru (w formacie mm-HH)"/>
         </div>
         <div class="col-sm-6 mb-3 mb-sm-0">
-            <form:input path="pickUpComment" type="text" class="form-control form-control-user" id="examplePickUpComment"
+            <form:input path="pickUpComment" type="text" class="form-control form-control-user"
+                        id="examplePickUpComment"
                         placeholder="Komentarz do odbioru"/>
         </div>
     </div>

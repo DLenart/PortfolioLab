@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -102,14 +102,20 @@
             Możesz sprawdzić czym się zajmują.</p>
 
         <ul class="help--slides-items">
-<c:forEach items="${institutions}" var="institution">
-            <li>
-                <div class="col">
-                    <div class="title">${institution.name}</div>
-                    <div class="subtitle">${institution.description}</div>
-                </div>
-
-</c:forEach>
+            <c:forEach items="${institutions}" var="institution" step="2" varStatus="status">
+                <li>
+                    <div class="col">
+                        <div class="title">Fundacja "${institution.name}"</div>
+                        <div class="subtitle">Cel i misja: ${institution.description}</div>
+                    </div>
+                    <div class="col">
+                        <c:if test="${!status.last}">
+                            <div class="title">Fundacja "${institutions.get(status.index + 1).name}"</div>
+                            <div class="subtitle">Cel i misja: ${institutions.get(status.index + 1).description}</div>
+                        </c:if>
+                    </div>
+                </li>
+            </c:forEach>
         </ul>
     </div>
 
